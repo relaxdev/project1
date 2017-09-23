@@ -4,15 +4,16 @@ node_js:
 cache:
   directories:
     - node_modules
-before_script:
-  - git config --global user.email "thoidaiso2017@gmail.com"
-  - git config --global user.name "Thoi Dai So 2017"
-  - git remote rm origin
-  - git remote add origin https://e0bb8228b4f38ddc7b7edeae495f1c2f67b9c43c@github.com/thoidaiso2017/project1.git
 
 script:
+  - yarn build
   - yarn test
-  - yarn deploy
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
 branches:
   except:
     - gh-pages
