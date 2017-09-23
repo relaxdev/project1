@@ -1,0 +1,48 @@
+version: '2'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/application
+      - ./docker/ssh:/root/.ssh
+    command: yarn start
+    ports:
+      - 3000:3000
+
+#networks:
+#  elk:
+#    driver: bridge
+#services:
+#  clusterclient:
+#    network_mode: host
+#    build: dockers/clusterclient
+#    command: tail -f /dev/null
+#    volumes:
+#      - ./:/Users/user/thaonguyen/working
+#      - ~/.kube/:/root/.kube
+#      - /Users/user/Workspaces/lel/lel-dev/kubernetes:/Users/user/Workspaces/lel/lel-dev/kubernetes
+
+#  elasticsearch:
+#    build: dockers/elasticsearch
+#    command: bash -c "while true; do echo hello; sleep 2; done"
+#    volumes: # volumes_from don't trigger inotify events
+#      - ./:/Users/user/thaonguyen/everything
+#      - ./dockers/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+
+#  postgres:
+#    build: dockers/postgres
+#    network_mode: host
+#    ports:
+#      - 5432
+#    volumes:
+#      - ./dockers/postgres/data:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_PASSWORD: pg_pass
+#      POSTGRES_USER: postgres_user
+#      POSTGRES_DB: postgres_db
+#  golang:
+#    build: dockers/golang
+#    network_mode: host
+#    command: tail -f /dev/null
